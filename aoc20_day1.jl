@@ -15,20 +15,20 @@ end
 solution_1 = 0
 for i in inp, j in inp
     if i + j == 2020
-        solution_1 = i * j
+        global solution_1 = i * j
         break
     end
 end
-
-check_answer(solution_1, 1, 1)
 
 ## -- PART 2 --
 solution_2 = 0
 for i in inp, j in inp, k in inp
     if i + j + k == 2020
-        solution_2 = i * j * k
+        global solution_2 = i * j * k
         break
     end
 end
 
+## -- CHECK --
+check_answer(solution_1, 1, 1)
 check_answer(solution_2, 1, 2)

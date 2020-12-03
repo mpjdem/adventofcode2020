@@ -40,8 +40,6 @@ end
 
 solution_1 = sum(map(pln -> validate_password_1(pln[1], pln[2]), inp))
 
-check_answer(solution_1, 2, 1)
-
 ## -- PART 2 --
 function validate_password_2(pol::PasswordPolicy, pw::String)::Bool
     xor(pw[pol.first_n] == pol.chr, pw[pol.second_n] == pol.chr)
@@ -49,4 +47,6 @@ end
 
 solution_2 = sum(map(pln -> validate_password_2(pln[1], pln[2]), inp))
 
+## -- CHECK --
+check_answer(solution_1, 2, 1)
 check_answer(solution_2, 2, 2)
