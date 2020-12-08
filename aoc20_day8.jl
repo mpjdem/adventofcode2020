@@ -67,7 +67,7 @@ solution_1 = debug_infinite_loop(inp).state
 
 ## -- PART 2 --
 solution_2 = Nothing
-for i in collect(1:length(inp))
+for i in 1:length(inp)
     if inp[i].operation == "acc" continue end
 
     patched = copy(inp)
