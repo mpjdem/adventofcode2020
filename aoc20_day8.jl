@@ -66,7 +66,7 @@ end
 solution_1 = debug_infinite_loop(inp).state
 
 ## -- PART 2 --
-solution_2 = Nothing
+solution_2 = nothing
 for i in 1:length(inp)
     if inp[i].operation == "acc" continue end
 
