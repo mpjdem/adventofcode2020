@@ -44,7 +44,7 @@ end
 solution_1 = abs(ship.x) + abs(ship.y)
 
 ## -- PART 2--
-function move_wp(wo::WaterObject, instr::Tuple{String, Int})
+function move_wp(wo::WaterObject, instr::Tuple{String, Int})::WaterObject
     if instr[1] in ["N", "E", "S", "W"]
         move_ship(wo, instr)
     else
