@@ -60,13 +60,13 @@ solution_1 = sum(values(addresses))
 ## Floating bit combinations are generated as 1:2^nbits in binary
 addresses = Dict()
 for instr in instructions, memint in instr.memints
-    y = int2bit(memint[1], masksz)
+    bval = int2bit(memint[1], masksz)
     nbits = sum(instr.xmask)
     for floatint in 0:(2^nbits - 1)
         floatbits = int2bit(floatint, nbits)
-        y[instr.xmask] = floatbits
-        y[instr.bitmask] .= true 
-        addresses[bit2int(y)] = memint[2]
+        bval[instr.xmask] = floatbits
+        bval[instr.bitmask] .= true 
+        addresses[bit2int(bval)] = memint[2]
     end
 end
 
