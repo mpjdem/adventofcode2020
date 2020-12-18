@@ -57,7 +57,7 @@ end
 solution_1 = sum(values(addresses))
 
 ## -- PART 2 --
-## Floating bit combinations are generated as 1:2^nbits in binary
+## Floating bit combinations are generated as 0:(2^nbits-1) in binary
 addresses = Dict()
 for instr in instructions, memint in instr.memints
     bval = int2bit(memint[1], masksz)
