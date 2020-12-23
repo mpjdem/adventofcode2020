@@ -12,10 +12,11 @@ inp = open("input/input22.txt", "r") do file
 end
 
 idx2 = only(findall(inp .== "Player 2:"))
+
+## -- PART 1 --
 deck1 = parse.(Int, inp[2:(idx2 - 2)])
 deck2 = parse.(Int, inp[(idx2+1):end])
 
-## -- PART 1 --
 while !isempty(deck1) && !isempty(deck2)
     card1 = popat!(deck1, 1)
     card2 = popat!(deck2, 1)
@@ -28,15 +29,15 @@ while !isempty(deck1) && !isempty(deck2)
     end
 end
 
-winning_deck = length(deck1) != 0 ? deck1 : deck2
+winning_deck = !isempty(deck1) ? deck1 : deck2
 solution_1 = sum(winning_deck .* (length(winning_deck):-1:1))
 
 ## -- PART 2 --
 function recursive_combat(deck1, deck2)
 
     local gamestates = Set() 
+    p1_won_game = Nothing
 
-    p1_won_game = undef
     while true 
         
         ## Stop if the same deck composition is encountered again
@@ -54,12 +55,13 @@ function recursive_combat(deck1, deck2)
 
         ## Either decide the round by a subgame, or as normal
         p1_won_round = if length(deck1) >= card1 && length(deck2) >= card2
-            recursive_combat(deck1[1:card1], deck2[1:card2])[1] == 1
+            winner, score = recursive_combat(deck1[1:card1], deck2[1:card2])
+            winner == 1
         else
             card1 > card2
         end
         
-        ## The winner gets both cards
+        ## The winner gets both cards, winner's card first
         if p1_won_round 
             push!(deck1, card1)
             push!(deck1, card2)
@@ -68,7 +70,7 @@ function recursive_combat(deck1, deck2)
             push!(deck2, card1)
         end
 
-        ## If one deck is empty, Stop
+        ## If one deck is empty, stop
         if isempty(deck1) || isempty(deck2)
             p1_won_game = !isempty(deck1)
             break 
@@ -86,7 +88,7 @@ end
 
 deck1 = parse.(Int, inp[2:(idx2 - 2)])
 deck2 = parse.(Int, inp[(idx2+1):end])
-solution_2 = recursive_combat(deck1, deck2)[2]
+winner, solution_2 = recursive_combat(deck1, deck2)
 
 ## -- CHECK --
 check_answer(solution_1, 22, 1)
