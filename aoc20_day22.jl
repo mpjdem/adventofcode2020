@@ -34,14 +34,14 @@ solution_1 = sum(winning_deck .* (length(winning_deck):-1:1))
 ## -- PART 2 --
 function recursive_combat(deck1, deck2)
 
-    local gamestates = [] 
+    local gamestates = Set() 
 
     p1_won_game = undef
     while true 
         
         ## Stop if the same deck composition is encountered again
         this_state = hash([deck1, deck2])
-        if this_state in gamestates 
+        if this_state ∈ gamestates 
             p1_won_game = true
             break
         else
