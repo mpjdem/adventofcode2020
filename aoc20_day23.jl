@@ -17,16 +17,17 @@ function play_cups(cups, nrounds)
     d = Dict(zip(cups, vcat(cups[2:end], cups[1])))
     cur = cups[1]
     for roundn in 1:nrounds
-        picked_up = [d[cur], d[d[cur]], d[d[d[cur]]]]
-        d[cur] = d[picked_up[3]]
+        pu1 = d[cur]; pu2 = d[pu1]; pu3 = d[pu2]
+        nxt = d[pu3]
+        d[cur] = nxt
         dest = cur - 1
-        while dest ∈ picked_up || dest == 0
+        while dest == pu1 || dest == pu2 || dest == pu3 || dest == 0
             dest = dest - 1
             if dest <= 0 dest = length(cups) end 
         end
-        d[picked_up[3]] = d[dest]
-        d[dest] = picked_up[1] 
-        cur = d[cur]
+        d[pu3] = d[dest]
+        d[dest] = pu1 
+        cur = nxt
     end
     d
 end
