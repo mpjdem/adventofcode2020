@@ -1,4 +1,4 @@
-## Advent of Code 2020, Day 22 
+## Advent of Code 2020, Day 22
 ## https://adventofcode.com/2020/day/22
 ##
 ## Author: Maarten Demeyer <mpjdem@gmail.com>
